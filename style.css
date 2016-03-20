@@ -1,0 +1,24 @@
+/*
+
+	Theme Name: WORDPRESS THEME FOR TURBINE BROOKLYN
+	Author: Mike Moore
+	Website: http://realestatearts.com
+	Twitter: @realestatearts
+	Version: 1.2
+	Description: Mike's WORDPRESS BLANK FOR DEVELOPING SITES
+
+	CONTENTS
+	-------------
+	- Global resets
+	- Global typography & layout rules
+	- Page styles
+	- Post styles
+	- General bits
+
+	- Media queries
+
+*/
+
+.sticky {}          /* DO NOT EDIT THIS */
+.gallery-caption {} /* THESE ARE USELESS */
+.bypostauthor {}    /* THEY ARE ONLY TO KEEP THEME CHECK HAPPY */
