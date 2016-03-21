@@ -52,7 +52,7 @@ if ( have_posts() && is_single() OR is_page()):while(have_posts()):the_post();
   //  $siteDesc =  get_bloginfo('description');
   }
   if($siteDesc == '') {
-  //  $siteDesc =  get_bloginfo('description');
+    $siteDesc =  get_bloginfo('description');
   }
 endwhile;
 else: ?>
@@ -73,7 +73,7 @@ $socialImg = '';
 $headerGal = get_post_meta( $post->ID, 'header-gallery', true );
 if(!empty($headerGal)) {
   $theImg = $headerGal[0];
-  $socialImg = wp_get_attachment_image_src($theImg['image'], 'fake-full')[1]   ;
+  $socialImg = wp_get_attachment_image_src($theImg['image'], 'fake-full')[0];
 
 } else {
   //GET THE DEFAULT SOCIAL IMG
@@ -81,6 +81,24 @@ if(!empty($headerGal)) {
 }
 
  ?>
+
+<?php
+// DECLARE THE NAV ITEMS
+$navItems = array();
+$pages = get_pages(array(
+  'sort_column' => 'menu_order'
+));
+
+foreach($pages as $p) {
+  array_push($navItems,array(
+    'title' => $p->post_title,
+    'url' => get_permalink($p),
+    'class' => $p->post_name
+  ));
+}
+
+?>
+
 
 
 
@@ -102,7 +120,30 @@ if(!empty($headerGal)) {
 <body id="top">
 <div id="css-checker"></div>
 <header>
+  <h1 class="logo">
+    <span class="hide">Turbine</span>
+  </h1>
 
+  <nav id="top-menu">
+
+    <ul class="no-style">
+      <?php
+      foreach($navItems as $ni) {
+        ?>
+          <li class="header-nav-item <?php echo $ni['class']?>">
+            <a href="<?php echo $ni['url'];?>">
+              <?php echo $ni['title'];?>
+            </a>
+          </li>
+
+        <?php
+      }
+      ?>
+
+
+    </ul>
+  </nav>
 
 </header>
 <div id="ajax-catcher">
+  <div id="main-content-container" data-slug="<?php echo $slug;?>">

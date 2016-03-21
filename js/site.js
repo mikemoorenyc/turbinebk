@@ -29,7 +29,7 @@ function siteInit() {
 
 
 
-  //theHistory();
+  theHistory();
 
 
   //CHECK IF CSS IS LOADED
@@ -48,7 +48,8 @@ function siteInit() {
 
 
 
-  pageLoader();
+  var firstSlug = $('#main-content-container').data('slug');
+  pageLoader(firstSlug);
 
   $('html').addClass('_page-loaded');
   console.log('scripts loaded');

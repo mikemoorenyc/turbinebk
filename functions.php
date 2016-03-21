@@ -12,13 +12,13 @@ remove_action('wp_head', 'wp_generator');// Removes the WordPress version as a l
 
 add_theme_support('post-thumbnails');
 
-
+add_image_size ( 'fake-full', 2000 , 2000 , false ) ;
 
 
 add_action( 'admin_init', 'my_theme_add_editor_styles' );
 function my_theme_add_editor_styles() {
     add_editor_style( 'css/editor-styles.css' );
-}  
+}
 
 // DIRECTORY REPLACER
 
@@ -44,5 +44,7 @@ function content_cleaner($content) {
 
     return $content;
 }
+
+include 'social-media-links.php';
 // add_filter('the_content', 'content_cleaner',20);
 ?>
