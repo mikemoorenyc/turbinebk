@@ -28,7 +28,13 @@ function siteInit() {
   }.orientation();
 
 
-
+//PROGRAMATICALLY Attach Fastclick
+  if(Modernizr.touchevents) {
+    $(function() {
+      FastClick.attach(document.body);
+    });
+  }
+  
   theHistory();
 
 
