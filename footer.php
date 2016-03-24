@@ -1,7 +1,7 @@
 
 </div><!-- #main-content-container-->
 </div><!-- #ajax-catcher -->
-<footer>
+<div id="footer">
   <div class="footer-logo">
 
   </div>
@@ -78,7 +78,7 @@
     <a href="http://realestatearts.com" target="_blank">Designed &amp; Developed by REA</a>
   </div>
 
-</footer>
+</div>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script id="inline-scripts"><?php $inlinejs = file_get_contents($siteDir.'/js/inline-load.js'); dirReplacer($inlinejs);?></script>

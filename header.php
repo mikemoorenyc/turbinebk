@@ -119,7 +119,7 @@ foreach($pages as $p) {
 
 <body id="top">
 <div id="css-checker"></div>
-<header>
+<div id="header">
   <h1 class="logo">
     <span class="hide">Turbine</span>
   </h1>
@@ -144,7 +144,7 @@ foreach($pages as $p) {
     </ul>
   </nav>
 
-</header>
+</div>
 <div id="ajax-catcher">
   <div id="main-content-container" data-slug="<?php echo $slug;?>">
 
