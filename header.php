@@ -119,6 +119,7 @@ foreach($pages as $p) {
 
 <body id="top">
 <div id="css-checker"></div>
+<div id="app-wrap">
 <div id="header">
   <h1 class="logo">
     <span class="hide">Turbine</span>

@@ -47,4 +47,12 @@ function content_cleaner($content) {
 
 include 'social-media-links.php';
 // add_filter('the_content', 'content_cleaner',20);
+include 'admin-check-off.php';
+
+
+//SLUGMAKER
+function lilSlugMaker($string) {
+  return strtolower(preg_replace('/\PL/u', '', $string));
+}
+
 ?>

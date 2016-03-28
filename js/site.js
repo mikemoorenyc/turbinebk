@@ -14,6 +14,9 @@ function siteInit() {
         }else {
          $('html').removeClass('_orientation-landscape').addClass('_orientation-portrait');
         }
+        //SET THE FOOTER THING
+        var fh = $('#footer').height();
+        $('#app-wrap').css('padding-bottom', fh+'px');
       }
       //console.log(this);
       decider(this.ww,this.wh);
@@ -34,7 +37,7 @@ function siteInit() {
       FastClick.attach(document.body);
     });
   }
-  
+
   theHistory();
 
 
