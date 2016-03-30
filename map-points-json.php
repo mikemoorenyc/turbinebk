@@ -1,7 +1,5 @@
 <?php
 require_once("../../../wp-load.php");
-?>
-<?php
 
 $location = get_page_by_title('Location');
 

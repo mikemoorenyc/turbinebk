@@ -33,7 +33,7 @@ function siteInit() {
 
 //PROGRAMATICALLY Attach Fastclick
   if(Modernizr.touchevents) {
-    $(function() {
+    $(function() { 
       FastClick.attach(document.body);
     });
   }

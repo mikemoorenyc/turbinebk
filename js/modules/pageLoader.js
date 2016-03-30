@@ -5,7 +5,7 @@ function pageLoader(newSlug) {
 
   //NAV ACTIVE CLASSES
   $('nav#top-menu ul li').removeClass("active");
-   $('nav#top-menu ul li.'+newSlug).addClass('active');
+  $('nav#top-menu ul li.'+newSlug).addClass('active');
 
 
   //SEND CURRENT STATE TO GOOGLE
@@ -20,7 +20,7 @@ function pageLoader(newSlug) {
   $(internalLinks).addClass('internal');
   $('a.internal').each(function(){
     var linkstr = $(this).attr('href');
-    if($(this).attr('target') == "_blank" || linkstr.indexOf('.pdf') >= 0 || linkstr.indexOf('.jpg') >= 0 || linkstr.indexOf('.png') >= 0) {
+    if($(this).attr('target') == "_blank" || linkstr.indexOf('.pdf') >= 0 || linkstr.indexOf('.jpg') >= 0 || linkstr.indexOf('.png') >= 0 || linkstr.indexOf('.zip') >= 0 ||  linkstr.indexOf('.gif') >= 0) {
       $(this).removeClass('internal');
     }
   });
