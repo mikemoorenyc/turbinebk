@@ -55,4 +55,7 @@ function lilSlugMaker($string) {
   return strtolower(preg_replace('/\PL/u', '', $string));
 }
 
+
+include 'map-points-meta.php';
+
 ?>
