@@ -78,7 +78,7 @@ var CatForm =  React.createClass({
     }
     return (
       <div className="category-form">
-        <div className="fields">
+        <div className="fields clearfix">
           <div data-empty={!filled} className="input-field">
 
             <input type="text" placeholder="Category Name" value={this.state.name} onChange={this.changeName}/>

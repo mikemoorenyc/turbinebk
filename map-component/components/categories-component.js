@@ -163,9 +163,9 @@ var CategoriesComponent = React.createClass({
     $(APP).off('receiveFromPoints');
   },
   render: function() {
-    
+
     var newCat = <div className="footer">
-                    <button disabled={this.state.editing} onClick={this.addACat} className="btn-class button button-primary">Add category</button>
+                    <a href="#" disabled={this.state.editing} onClick={this.addACat} className="taxonomy-add-new">+ Add New Category</a>
                   </div>;
 
 

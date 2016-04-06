@@ -73,7 +73,8 @@ $socialImg = '';
 $headerGal = get_post_meta( $post->ID, 'header-gallery', true );
 if(!empty($headerGal)) {
   $theImg = $headerGal[0];
-  $socialImg = wp_get_attachment_image_src($theImg['image'], 'fake-full')[0];
+  $socialImg = wp_get_attachment_image_src($theImg['image'], 'fake-full');
+  $socialImg = $socialImg[0];
 
 } else {
   //GET THE DEFAULT SOCIAL IMG

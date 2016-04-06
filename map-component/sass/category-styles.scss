@@ -1,20 +1,31 @@
+#map_categories_box {
+  .inside {
+    margin: 0;
+    padding:0;
+  }
+}
+
 #categories-component{
   .categoryItem {
     position:relative;
-    padding: 5px 0;
+    padding:8px 12px;
+    background:white;
+    &:nth-child(odd) {
+      background: $light-grey;
+    }
     .category-item {
       position:relative;
-      padding-left: 40px;
+      padding-left: 35px;
       .category-title {
-        line-height:30px;
+        line-height:25px;
       }
       .edit-bubble {
         display:block;
         position:absolute;
         left: 0;
         top:50%;
-        width:30px;
-        height:30px;
+        width:25px;
+        height:25px;
         border-radius:50%;
         border: 0;
         transform:translateY(-50%);
@@ -35,9 +46,32 @@
         }
       }
     }
+    &.currently-editing {
+      border-top:1px solid $border-color;
+    }
   }
   .footer {
-    padding:10px 0 0 0;
-    text-align: right;
+    padding:2px 12px;
+    text-align:left;
+    border-top: 1px solid $border-color;
+    > a[disabled] {
+      opacity: .1;
+      pointer-events: none;
+    }
+  }
+}
+
+.category-form {
+  .fields {
+    .sp-replacer {
+      float:right;
+    }
+    .input-field:first-child {
+      float:left;
+      width:50%;
+      input {
+        width:100%;
+      }
+    }
   }
 }
