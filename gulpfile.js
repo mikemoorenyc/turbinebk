@@ -3,7 +3,9 @@ var buildDir = 'build-turbinebk';
 //GENERAL MODULES
 var gulp = require('gulp'),
     concat = require('gulp-concat'),
-    changed = require('gulp-changed');
+    changed = require('gulp-changed'),
+    babel = require('gulp-babel'),
+    replace = require('gulp-replace');
 //HTML MINIFIERS
 var htmlclean = require('gulp-htmlclean');
 //CSS PROCESSING
@@ -62,7 +64,24 @@ function htmlProcessor(blob, dest) {
     .pipe(gulp.dest(dest));
 }
 
+gulp.task('mapcomponent', function(){
+  gulp.src(['map-component/components/*.js','map-component/runner.js'])
+  .pipe(concat('build.js'))
 
+  .pipe(babel({
+			presets: ['es2015', 'react']
+		}))
+  .pipe(uglify())
+  .pipe(replace('$(', 'jQuery('))
+  .pipe(gulp.dest('../'+buildDir+'/map-component'));
+  jsProcessor([ 'map-component/react-sort.js', 'map-component/spectrum.js'], '../'+buildDir+'/map-component', 'plain.js');
+  gulp.src('map-component/initiator.js')
+    .pipe(uglify())
+    .pipe(replace('$(', 'jQuery('))
+    .pipe(gulp.dest('../'+buildDir+'/map-component'));
+  sassProcessor(['map-component/main.scss'],'../'+buildDir+'/map-component')
+  htmlProcessor(['map-component/*.html','map-component/*.php'],'../'+buildDir+'/map-component')
+});
 
 //SASS CSS TASK
 gulp.task('sass', function () {
@@ -126,6 +145,7 @@ gulp.task('watch', function() {
     gulp.watch(['*.php', '*.html'], ['templatecrush']);
     gulp.watch(['style.css', 'screenshot.png'], ['wpdump']);
     gulp.watch(['assets/svgs/*.svg'], ['svgstore']);
+    gulp.watch(['map-component/**/*'], ['mapcomponent']);
 });
 
-gulp.task('build', [ 'js', 'imgmin', 'templatecrush', 'fontdump', 'wpdump','sass', 'svgstore']);
+gulp.task('build', [ 'js', 'imgmin', 'templatecrush', 'fontdump', 'wpdump','sass', 'svgstore', 'mapcomponent']);

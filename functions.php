@@ -56,6 +56,6 @@ function lilSlugMaker($string) {
 }
 
 
-include 'map-points-meta.php';
+include 'map-component/main-include.php';
 
 ?>
