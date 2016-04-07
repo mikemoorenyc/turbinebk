@@ -7,7 +7,8 @@ var PointItem = React.createClass({
   deleteClick: function() {
     this.props.deletePoint(this.props.id, true);
   },
-  editClick: function() {
+  editClick: function(e) {
+
     this.props.savePoint({
       id:this.props.id,
       title: this.props.title,

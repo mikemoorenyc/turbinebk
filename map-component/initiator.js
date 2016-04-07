@@ -6,7 +6,7 @@
 
 var center = new google.maps.LatLng(40.7067279,-74.0397625);
   var mapOptions = {
-    zoom: 13,
+    zoom: 15,
     center: center,
     disableDefaultUI: true,
     zoomControl: true

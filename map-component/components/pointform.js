@@ -48,7 +48,7 @@ var PointForm = React.createClass({
     $('#map-container').append($('#theMap'));
     google.maps.event.trigger(map,'resize');
     map.setCenter(initialCenter);
-    map.setZoom(13);
+    map.setZoom(15);
     marker.setPosition(initialCenter);
 
     //SET MARKER DRAG LISTENER\

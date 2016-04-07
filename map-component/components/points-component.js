@@ -114,10 +114,10 @@ var PointsComponent = React.createClass({
 
 
           <div className="copy">
-            <h1>Get Started</h1>
+            <h1>Get Started</h1>    
 
             <p>Start adding points to your map.</p>
-            <button onClick={this.addAPoint} className="button button-primary button-large" disabled={this.state.editing}>Add the first point</button>
+            <button onClick={this.addAPoint} className="button button-primary button-hero" disabled={this.state.editing}>Add the first point</button>
           </div>
 
 

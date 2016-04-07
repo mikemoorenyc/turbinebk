@@ -143,11 +143,11 @@
 #search-holder {
   background:white;
   position:absolute;
-  right: 10px;
   top: 10px;
   left: 10px;
   box-shadow: 0 2px 2px rgba(0,0,0,.1);
   border-radius:5px;
+  width:calc(100% - 20px);
 }
 #search-holder #search-input {
   display:block;
@@ -155,10 +155,9 @@
   padding: 0;
   border: 0;
   box-shadow: none;
-  height: 50px;
   background:none;
   width: 100%;
-  padding: 0px 10px;
-  font-size: 25px;
+  padding: 10px;
+  font-size: 14px;
 
 }
