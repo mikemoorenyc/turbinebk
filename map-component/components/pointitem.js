@@ -1,5 +1,9 @@
 var PointItem = React.createClass({
-
+  getInitialState: function() {
+    return {
+      hovering: false
+    }
+  },
   deleteClick: function() {
     this.props.deletePoint(this.props.id, true);
   },
@@ -13,10 +17,16 @@ var PointItem = React.createClass({
       editing:true
     })
   },
+  entering: function(state) {
+    this.setState({hovering:true})
+  },
+  leaving: function() {
+    this.setState({hovering:false})
+  },
   render: function() {
-    var handle = <div className="drag-handle">
+    var handle = <div className="drag-handle" data-hover={this.state.hovering}>
                     <div className="icon">
-                      <hr/>
+                      <span></span>
                     </div>
                   </div>;
     if(this.props.canDrag == false) {
@@ -24,13 +34,19 @@ var PointItem = React.createClass({
     }
 
     return (
-      <div className="point-item"style={{borderLeft: '3px solid '+this.props.color}}>
-      {this.props.title}
-      {handle}
-      <div className="category-controls">
-        <button onClick={this.editClick}>Edit</button>
-        <button onClick={this.deleteClick}>Delete</button>
+      <div className="point-item" onMouseEnter={this.entering} onMouseLeave={this.leaving}>
+
+      <div className="title"
+      dangerouslySetInnerHTML={{__html:this.props.title}}>
+
       </div>
+      {handle}
+      <button
+        className="edit-button"
+        data-hover={this.state.hovering}
+        onClick={this.editClick}
+        dangerouslySetInnerHTML={{__html:PENICON}}>
+      </button>
       </div>
     )
   }

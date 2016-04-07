@@ -46,16 +46,16 @@ var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
     var style = {
       'backgroundColor': 'rgba('+rgb.r+','+rgb.g+','+rgb.b+',.3)'
     }*/
-    var handle = <div className="drag-handle">
+    var handle = <div className="drag-handle" data-hover={this.state.hovering}>
                     <div className="icon">
-
+                      <span></span>
                     </div>
                   </div>;
     if(this.props.canDrag == false) {
       handle = false;
     }
     var iconClass = 'icon';
-    if(this.luma(this.props.color) > 200) {
+    if(this.luma(this.props.color) > 210) {
       iconClass = 'icon dark';
     }
     return (

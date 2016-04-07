@@ -24,12 +24,12 @@ var PointForm = React.createClass({
   getInitialState: function() {
 
     if(!(this.props.lat)) {
-      var lat = 40.7067279;
+      var lat = 40.696831;
     } else {
       var lat = this.props.lat;
     }
     if(!(this.props.lng)) {
-      var lng = -74.0397625;
+      var lng = -73.967542;
     } else {
       var lng = this.props.lng;
     }
@@ -70,7 +70,9 @@ var PointForm = React.createClass({
         return;
       }
       var point = places[0];
+
       this.updateCenter(point.geometry.location.lat(), point.geometry.location.lng());
+      this.setState({title: point.name});
     }.bind(this));
   },
   updateCenter(lat,lng) {
@@ -109,6 +111,10 @@ var PointForm = React.createClass({
       });
     }
   },
+  deleteClick: function(e) {
+    e.preventDefault();
+    this.props.deletePoint(this.props.id,true);
+  },
   updateTitle: function(e) {
       this.setState({title: e.target.value});
   },
@@ -130,24 +136,23 @@ var PointForm = React.createClass({
   },
   render: function() {
     var disabled = true;
+    var deleter = false;
     if(this.state.title) {
       disabled = false;
     }
     var publishCopy = 'Save';
     if(!this.props.newPoint) {
       publishCopy = 'Update';
+      deleter = <a href="#" className="delete" onClick={this.deleteClick}>Delete</a>;
     }
 
     return (
       <div className="point-form">
         <div className="point-form-header clearfix">
-          <div className="input-field" data-empty={disabled}>
+
             <input type="text"  placeholder="Point Name" value={this.state.title} onChange={this.updateTitle}/>
-          </div>
-          <div className="select-field">
-          <div className="cat-name" style={{borderColor: this.getCatColor(this.state.cat)}}>
-            <span dangerouslySetInnerHTML={{__html:this.state.catName}}></span>
-          </div>
+
+
           <select defaultValue={this.state.cat} onChange={this.updateCat}>
           {
             this.props.categories.map(function (cat) {
@@ -157,16 +162,16 @@ var PointForm = React.createClass({
             })
           }
           </select>
-          </div>
+          <br className="clear" />
 
         </div>
 
 
-        <div id="map-container" style={{display:'none'}}></div>
+        <div id="map-container" ></div>
         <div className="FormFooter">
-
-          <button className="cancel btn-class secondary" onClick={this.cancelClick}>Cancel</button>
-          <button className="submit btn-class" onClick={this.publishClick} disabled={disabled}>{publishCopy}</button>
+          {deleter}
+          <button className="cancel-button button button-secondary " onClick={this.cancelClick}>Cancel</button>
+          <button className="publish-button button button-primary " onClick={this.publishClick} disabled={disabled}>{publishCopy}</button>
         </div>
 
       </div>

@@ -79,8 +79,9 @@ componentWillReceiveProps: function(nextProps) {
 },
 
 render: function() {
+  var hider = {borderLeft: '3px solid '+this.props.color};
   if(this.state.points.length < 1) {
-    var hider = {display:'none'};
+     hider = {display:'none'};
   }
 
   var draggable = !this.props.editState;
@@ -115,7 +116,7 @@ render: function() {
   }.bind(this));
   return(
     <div className="category-block" style={hider} data-dragging={this.state.dragging}>
-    <h4 className="cat-heading" dangerouslySetInnerHTML={{__html:this.props.getCatInfo(this.props.id, 'name')}}></h4>
+    <h2 className="cat-heading" dangerouslySetInnerHTML={{__html:this.props.getCatInfo(this.props.id, 'name')}}></h2>
     <div ref="pointBlock">
     {theList}
     </div>

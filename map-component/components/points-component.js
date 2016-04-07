@@ -109,15 +109,17 @@ var PointsComponent = React.createClass({
     if(this.state.points < 1) {
 
       return (
-        <div className="points-component empty-state">
+        <div className="points-component empty-state" style={{backgroundImage: 'url('+SITEDIRECTORY+'/assets/imgs/empty-map.jpg'+')'}}>
         <input type="hidden" name="map_data" id="map_data" value={serialized} />
-          <img src="empty-map.png" height="100"/>
+
+
           <div className="copy">
-            <h4>Get Started</h4>
+            <h1>Get Started</h1>
 
             <p>Start adding points to your map.</p>
+            <button onClick={this.addAPoint} className="button button-primary button-large" disabled={this.state.editing}>Add the first point</button>
           </div>
-          <button onClick={this.addAPoint} className="btn-class" disabled={this.state.editing}>Add first point</button>
+
 
 
         </div>
@@ -125,11 +127,9 @@ var PointsComponent = React.createClass({
     }
     //NON-EMPTY
     var addButton = <div className="footer">
-                      <button onClick={this.addAPoint} className="addPoint btn-class">add map point</button>
+                      <a href="#" disabled={this.state.editing} onClick={this.addAPoint} className="addPoint taxonomy-add-new">+ Add New Map Point</a>
                     </div>;
-    if(this.state.editing) {
-      addButton = false;
-    }
+
 
     //CATEGORY BLOCKS
     var categoryBlocks = [];
@@ -137,6 +137,7 @@ var PointsComponent = React.createClass({
       var category = e;
       var catObject = {
         id: category.id,
+        color: category.color,
         points: []
       }
       var pointArray = []
@@ -158,7 +159,7 @@ var PointsComponent = React.createClass({
 
     var pointList = categoryBlocks.map(function(block){
       if(block.points.length > 0) {
-        return <PointCategoryBlock categories={this.state.categories} savePoint={this.setPoint} deletePoint={this.deletePoint} points={block.points} id={block.id} key={block.id} categoryBlocks={categoryBlocks} updatePoints={this.updatePoints} getCatInfo={this.getCatInfo} editState={this.state.editing} orderer={this.orderer}/>
+        return <PointCategoryBlock categories={this.state.categories} savePoint={this.setPoint} deletePoint={this.deletePoint} points={block.points} id={block.id} color={block.color} key={block.id} categoryBlocks={categoryBlocks} updatePoints={this.updatePoints} getCatInfo={this.getCatInfo} editState={this.state.editing} orderer={this.orderer}/>
       }
 
     }.bind(this))
@@ -173,7 +174,7 @@ var PointsComponent = React.createClass({
 
     return (
 
-      <div className="points-component " data-editing={this.state.editing}>
+      <div className="points-component submitbox" data-editing={this.state.editing}>
       <input type="hidden" name="map_data" id="map_data" value={serialized} />
       {pointList}
       {newPointItem}

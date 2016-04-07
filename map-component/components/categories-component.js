@@ -208,56 +208,9 @@ var CategoriesComponent = React.createClass({
       )
     }.bind(this));
 
-    /*
-    var catList = this.state.categories.map(function(cat) {
-      var saveCat = false,
-          catForm = false,
-          mainCat = 'categoryItem';
-      if(cat.editing) {
-
-        mainCat = 'categoryItem currently-editing';
-        catForm = <CatForm
-                    name={cat.name}
-                    color={cat.color}
-                    id={cat.id}
-                    newPoint={cat.newCat}
-                    deleteCat={this.deleteCat}
-                    saveCat={this.saveCat}
-                  />
-      }
-      if(cat.name && !cat.editing) {
-        saveCat = <CatItem
-                    canDrag={draggable}
-                    name={cat.name}
-                    color={cat.color}
-                    id={cat.id}
-                    deleteCat={this.deleteCat}
-                    saveCat={this.saveCat}
-                  />
-      }
-      return (
-        <div className={mainCat} key={cat.id} >
-          {saveCat}
-          {catForm}
-
-        </div>
-      );
-    }.bind(this));
-    return (
-      <div className="categories-component" data-dragging={this.state.dragging}>
-        <h4>Categories</h4>
-
-        <div className="category-list" ref="catList">
-          {catList}
-        </div>
-
-        {newCat}
-      </div>
-    )
-    */
     var serialized = JSON.stringify(this.state.categories);
     return(
-      <div className="categories-component" data-dragging={this.state.dragging} data-editing={this.state.editing}>
+      <div className="categories-component submitbox" data-dragging={this.state.dragging} data-editing={this.state.editing}>
         <input type="hidden" name="category_data" id="category_data" value={serialized} />
         <div className="category-list" ref="catList">
           {catList}

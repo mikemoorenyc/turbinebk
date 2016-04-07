@@ -81,4 +81,6 @@ function map_points_save_data( $post_id ) {
 }
 add_action( 'save_post', 'map_points_save_data' );
 
+add_action( 'save_post', 'map_save_meta_box_data' );
+
 ?>

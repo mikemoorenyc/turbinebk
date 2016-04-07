@@ -74,7 +74,7 @@ var CatForm =  React.createClass({
 
     }
     if(!this.props.newPoint) {
-      deleteBtn = <div><button className="delete-btn" onClick={this.deleteClick}>Delete this category</button></div>;
+      deleteBtn = <a href="#" className="submitdelete deletion" onClick={this.deleteClick}>Delete</a>;
     }
     return (
       <div className="category-form">
@@ -85,13 +85,15 @@ var CatForm =  React.createClass({
 
           </div>
           <input type="text" id="color-picker" onChange={this.changeColor} value={this.state.color} />
+          <br className="clear" />
         </div>
 
 
         <div className="sub-form-footer">
-          <button className="cancel-button btn-class secondary" onClick={this.cancelClick}>Cancel</button>
-          <button className="publish-button btn-class" onClick={this.publishClick} disabled={disabled}>{publishCopy}</button>
-          {deleteBtn}
+        {deleteBtn}
+          <button className="cancel-button button button-secondary button-small" onClick={this.cancelClick}>Cancel</button>
+          <button className="publish-button button button-primary button-small" onClick={this.publishClick} disabled={disabled}>{publishCopy}</button>
+
         </div>
       </div>
     );
