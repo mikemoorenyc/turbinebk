@@ -6,24 +6,15 @@
 }
 .points-component {
   &.empty-state {
+    height: 250px;
+    background-position: top left;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-color: #747779;
 
-    background:url('../assets/imgs/empty-bg.jpg') center center no-repeat;
-    background-size: cover;
 
-    &:before {
-      position: absolute;
-      display:block;
-      content:'';
-      left: 0;
-      top: 0;
-      right: 0;
-      bottom:0;
-      background:rgba(#4d2333,.8);
-    }
     .copy {
-      position: relative;
-      text-align:center;
-      padding: 40px 0px;
+      padding: 40px 0 0 200px;
       box-sizing: border-box;
       color:white;
       text-shadow: 0 0 3px rgba(0,0,0,.4);
@@ -169,10 +160,4 @@
   padding: 10px;
   font-size: 14px;
 
-}
-
-.zoom-controls {
-  position:absolute;
-  left:10px;
-  top:10px;
 }

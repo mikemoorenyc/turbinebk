@@ -1,0 +1,33 @@
+#points-component {
+  .map-window {
+    position:relative;
+    overflow:hidden;
+    img.map-image, .map-overlay {
+      position:absolute;
+      left:0;
+      top: 0;
+      width:100%;
+      height:100%;
+    }
+  }
+}
+.map-overlay {
+  .map-point {
+    position:absolute;
+    width:1px;
+    height:1px;
+    background:none;
+    cursor: move;
+    &:after {
+      display:block;
+      content:'';
+      width:22px;
+      height:40px;
+      background: url('../assets/imgs/pin-img.png');
+      position:absolute;
+      left:50%;
+      margin-left:-11px;
+      bottom:1px;
+    }
+  }
+}

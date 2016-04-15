@@ -1,22 +1,23 @@
-var CatItem = React.createClass({
+var PointItem = React.createClass({
   getInitialState: function() {
     return {
       hovering: false
     }
   },
-
   deleteClick: function() {
-    this.props.deleteCat(this.props.id, true);
+    this.props.deletePoint(this.props.id, true);
   },
-  editClick: function() {
-    this.props.saveCat({
+  editClick: function(e) {
+
+    this.props.savePoint({
       id:this.props.id,
-      name: this.props.name,
-      color: this.props.color,
+      title: this.props.title,
+      lat: this.props.lat,
+      lng: this.props.lng,
+      cat: this.props.cat,
       editing:true
     })
   },
-
   entering: function(state) {
     this.setState({hovering:true})
   },
@@ -24,7 +25,6 @@ var CatItem = React.createClass({
     this.setState({hovering:false})
   },
   render: function() {
-
     var handle = <div className="drag-handle" data-hover={this.state.hovering}>
                     <div className="icon">
                       <span></span>
@@ -35,17 +35,19 @@ var CatItem = React.createClass({
     }
 
     return (
-      <div className="category-item" onMouseEnter={this.entering} onMouseLeave={this.leaving}>
-      <div className="category-title">{this.props.name}</div>
+      <div className="point-item" onMouseEnter={this.entering} onMouseLeave={this.leaving}>
+
+      <div className="title"
+      dangerouslySetInnerHTML={{__html:this.props.title}}>
+
+      </div>
       {handle}
-      <button onClick={this.editClick} className="edit-bubble" style={{backgroundColor: this.props.color}}>
-        <span className="icon" data-hover={this.state.hovering} dangerouslySetInnerHTML={{__html:PENICON}}>
-
-        </span>
-
+      <button
+        className="edit-button"
+        data-hover={this.state.hovering}
+        onClick={this.editClick}
+        dangerouslySetInnerHTML={{__html:PENICON}}>
       </button>
-
-
       </div>
     )
   }

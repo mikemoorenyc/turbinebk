@@ -62,11 +62,7 @@ var PointsComponent = React.createClass({
         title:'',
         editing: true,
         newPoint: true,
-        cat: false,
-        coor:{
-          x: .5,
-          y:.5
-        }
+        cat: false
       }
     ]);
 
@@ -113,12 +109,12 @@ var PointsComponent = React.createClass({
     if(this.state.points < 1) {
 
       return (
-        <div className="points-component empty-state" >
+        <div className="points-component empty-state" style={{backgroundImage: 'url('+SITEDIRECTORY+'/assets/imgs/empty-map.jpg'+')'}}>
         <input type="hidden" name="map_data" id="map_data" value={serialized} />
 
 
           <div className="copy">
-            <h1>Get Started</h1>
+            <h1>Get Started</h1>    
 
             <p>Start adding points to your map.</p>
             <button onClick={this.addAPoint} className="button button-primary button-hero" disabled={this.state.editing}>Add the first point</button>
@@ -157,7 +153,7 @@ var PointsComponent = React.createClass({
         }
       }.bind(this));
       catObject.points = pointArray;
-
+      //console.log(catObject);
       categoryBlocks.push(catObject);
     }.bind(this));
 
@@ -172,7 +168,7 @@ var PointsComponent = React.createClass({
     var newPointItem = false;
     $(this.state.points).each(function(index,e){
       if(e.cat === false) {
-        newPointItem = <div className="pointItem currently-editing" ><PointForm title={e.title} coor={e.coor} newPoint={e.newPoint} cat={this.state.categories[0].id} id={e.id} savePoint={this.setPoint} deletePoint={this.deletePoint} categories={this.state.categories}/></div>
+        newPointItem = <div className="pointItem currently-editing" ><PointForm title={e.title} lat={e.lat} lng={e.lng} newPoint={e.newPoint} cat={this.state.categories[0].id} id={e.id} savePoint={this.setPoint} deletePoint={this.deletePoint} categories={this.state.categories}/></div>
       }
     }.bind(this));
 

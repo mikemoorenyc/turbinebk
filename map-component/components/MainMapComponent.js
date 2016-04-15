@@ -1,10 +1,16 @@
-var PointsComponent = React.createClass({
+var MainMapComponent = React.createClass({
   getInitialState: function() {
       return {
         points: INITIALPOINTS,
         categories: INITIALCATEGORIES,
-        disabled: false,
-        editing: false
+        imgwidth: INITIALW,
+        imgheight:INITIALH,
+        imgSrc: IMGSRC,
+        aspect: INITIALH / INITIALW,
+        zoom: 1,
+        dragging: false,
+        mousedown: false,
+        mapAttr: {}
       }
   },
   orderer: function(items) {
@@ -29,7 +35,6 @@ var PointsComponent = React.createClass({
     }
     return newID;
   },
-
   updatePoints: function(newPoints) {
     var editing = false;
     $(newPoints).each(function(index,e){
@@ -41,17 +46,6 @@ var PointsComponent = React.createClass({
     $(APP).trigger('receiveFromPoints', [newPoints, editing]);
     this.setState({points: newPoints, editing: editing});
   },
-  componentDidMount: function(){
-    $(APP).on('receiveFromCategories', function(event, newCategories, editing){
-      this.setState({
-        editing: editing,
-        categories: newCategories
-      })
-    }.bind(this));
-  },
-  componentWillUnmount: function(){
-    $(APP).off('receiveFromCategories');
-  },
   addAPoint: function(e) {
     e.preventDefault();
 
@@ -62,11 +56,7 @@ var PointsComponent = React.createClass({
         title:'',
         editing: true,
         newPoint: true,
-        cat: false,
-        coor:{
-          x: .5,
-          y:.5
-        }
+        cat: false
       }
     ]);
 
@@ -96,25 +86,30 @@ var PointsComponent = React.createClass({
 
     this.updatePoints(filteredPoints);
   },
-  getCatInfo: function(id,value) {
-    var catName = '';
-    $(this.state.categories).each(function(index,e){
-      var cat = e;
-      if(id ==e.id) {
-
-        catName =  e[value];
+  wheelMove: function(e) {
+    e.preventDefault();
+    console.log('asfddsf');
+    console.log(e.deltaY);
+  },
+  draggerStart: function() {
+    this.setState({mousedown:true});
+    setTimeout(function(){
+      if(this.state.mousedown == true) {
+        this.setState({dragging: true})
       }
-    }.bind(this));
-    return catName;
+    }.bind(this),500)
   },
 
-  render: function(){
-    var serialized = JSON.stringify(this.state.points);
+  draggerEnd: function() {
+    var dragState = this.state.dragging;
+    this.setState({mousedown:false, dragging:false});
+  },
+  render: function() {
     if(this.state.points < 1) {
 
       return (
-        <div className="points-component empty-state" >
-        <input type="hidden" name="map_data" id="map_data" value={serialized} />
+        <div className="points-component empty-state">
+        <input type="hidden" name="map_point_data" id="map_point_data" value={JSON.stringify(this.state.points)} />
 
 
           <div className="copy">
@@ -131,62 +126,61 @@ var PointsComponent = React.createClass({
     }
     //NON-EMPTY
     var addButton = <div className="footer">
-                      <a href="#" disabled={this.state.editing} onClick={this.addAPoint} className="addPoint taxonomy-add-new">+ Add New Map Point</a>
+                      <a href="#" disabled={this.state.disabled} onClick={this.addAPoint} className="addPoint taxonomy-add-new">+ Add New Map Point</a>
                     </div>;
 
-
-    //CATEGORY BLOCKS
-    var categoryBlocks = [];
-    $(this.state.categories).each(function(index,e){
+    //CREATE CATEGORY BLOCKS
+    var categoryBlocks = this.state.categories;
+    $(categoryBlocks).each(function(index,e){
       var category = e;
-      var catObject = {
-        id: category.id,
-        color: category.color,
-        points: []
-      }
-      var pointArray = []
+      var pointArray = [];
       $(this.state.points).each(function(index,e){
-
         var point = e;
 
         if(point.cat == category.id) {
-
-          point.color = category.color;
           pointArray.push(point);
-
         }
-      }.bind(this));
-      catObject.points = pointArray;
+      });
+      categoryBlocks[index].points = pointArray;
 
-      categoryBlocks.push(catObject);
     }.bind(this));
-
+    //MAKE THE POINT LIST
+    console.log(categoryBlocks);
     var pointList = categoryBlocks.map(function(block){
       if(block.points.length > 0) {
-        return <PointCategoryBlock categories={this.state.categories} savePoint={this.setPoint} deletePoint={this.deletePoint} points={block.points} id={block.id} color={block.color} key={block.id} categoryBlocks={categoryBlocks} updatePoints={this.updatePoints} getCatInfo={this.getCatInfo} editState={this.state.editing} orderer={this.orderer}/>
+        return <PointCategoryBlock
+                  categories={this.state.categories}
+                  savePoint={this.setPoint}
+                  deletePoint={this.deletePoint}
+                  points={block.points}
+                  id={block.id}
+                  name={block.name}
+                  key={block.id}
+                  categoryBlocks={categoryBlocks}
+                  updatePoints={this.updatePoints}
+                  editState={this.state.editing}
+                  orderer={this.orderer}/>
       }
 
     }.bind(this))
-
     //NEW POINT ITEM
     var newPointItem = false;
     $(this.state.points).each(function(index,e){
       if(e.cat === false) {
-        newPointItem = <div className="pointItem currently-editing" ><PointForm title={e.title} coor={e.coor} newPoint={e.newPoint} cat={this.state.categories[0].id} id={e.id} savePoint={this.setPoint} deletePoint={this.deletePoint} categories={this.state.categories}/></div>
+        newPointItem = <div className="pointItem currently-editing" ><PointForm title={e.title} lat={e.lat} lng={e.lng} newPoint={e.newPoint} cat={this.state.categories[0].id} id={e.id} savePoint={this.setPoint} deletePoint={this.deletePoint} categories={this.state.categories}/></div>
       }
     }.bind(this));
 
-    return (
-
-      <div className="points-component submitbox" data-editing={this.state.editing}>
-      <input type="hidden" name="map_data" id="map_data" value={serialized} />
-      {pointList}
-      {newPointItem}
-      {addButton}
-
+    return(
+      <div id="points-component">
+        <input type="hidden" name="map_point_data" id="map_point_data" value={JSON.stringify(this.state.points)} />
+        {pointList}
+        {newPointItem}
+        {addButton}
       </div>
     )
   }
+
 
 
 

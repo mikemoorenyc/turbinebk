@@ -12,8 +12,7 @@ var PointItem = React.createClass({
     this.props.savePoint({
       id:this.props.id,
       title: this.props.title,
-      lat: this.props.lat,
-      lng: this.props.lng,
+      coor: this.props.coor,
       cat: this.props.cat,
       editing:true
     })
