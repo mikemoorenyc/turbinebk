@@ -71,4 +71,6 @@ function map_points_callback( $post ) {
 }
 include 'category-section.php';
 include 'save-functions.php';
+
+include 'map-upload.php';
 ?>

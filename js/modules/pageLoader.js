@@ -27,14 +27,13 @@ function pageLoader(newSlug) {
 
   //RUN PAGE SPECIFIC FUNCTIONS
 
-  /*
-  if (typeof window['runner'+theSlug] == 'function') {
 
-    window['runner'+theSlug]();
+  if (typeof window['runner'+newSlug] == 'function') {
+
+    window['runner'+newSlug]();
   } else {
-
   }
-*/
+
 
 
 }

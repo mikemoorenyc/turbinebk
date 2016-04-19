@@ -23,8 +23,10 @@ foreach($cats as $c) {
       array_push($pointsArray, $p);
     }
   }
-  $catSchema['points'] = $pointsArray;
-  array_push($catWPoints, $catSchema);
+  if(!empty($pointsArray)) {
+    $catSchema['points'] = $pointsArray;
+    array_push($catWPoints, $catSchema);
+  }
 }
 echo json_encode($catWPoints);
 

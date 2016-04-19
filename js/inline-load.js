@@ -9,13 +9,7 @@ function loadCSS(e,t,n){"use strict";function o(){var t;for(var i=0;i<s.length;i
 
 
 loadCSS(cssExpand);
-$(document).ready(function(){
-  console.log($('#box')[0].getBoundingClientRect());
-  $('.click').click(function(){
-    $('#box').css('transform', 'scale(2)');
-    console.log($('#box')[0].getBoundingClientRect());
-  });
-});
+
 
 /*
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
