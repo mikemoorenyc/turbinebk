@@ -97,6 +97,10 @@ foreach($cats as $c) {
   </div>
 
 </div>
+<div id="map-controls">
+  <button class="in">Zoom In</button>
+  <button class="out">Zoom Out</button>
+</div>
 <style>
 <?php
 //CREATE STYLES
