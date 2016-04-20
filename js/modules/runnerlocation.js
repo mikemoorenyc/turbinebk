@@ -32,7 +32,7 @@ function runnerlocation() {
   $("img#map-img").on('panzoomchange',function(){
     overlaySetter();
   });
-  $(document).on('mousedown', '#map-overlay', function(event){
+  $('#map-overlay').on('mousedown', function(event){
     dragging = true;
     cursorX = event.clientX,
     cursorY = event.clientY;
@@ -40,10 +40,11 @@ function runnerlocation() {
   $(document).on('mouseup',function(){
     dragging = false;
   });
-  $(document).on('mouseleave', '#map-overlay',function(){
+  $('#map-overlay').on('mouseleave',function(){
     dragging = false;
   });
-  $(document).on('mousemove', '#map-overlay', function(e){
+  $('#map-overlay').on('mousemove', function(e){
+
     e.preventDefault();
     if(dragging) {
 
@@ -57,7 +58,54 @@ function runnerlocation() {
 
     }
   });
+  var wheelClicks = 0 ;
+  var wheelReset;
+  $(document).on('mousewheel', '#map-overlay', function(event, delta){
+    clearTimeout(wheelReset);
+    wheelReset = setTimeout(function(){
+      wheelClicks = 0;
+    },500);
+    event.preventDefault();
+    wheelClicks++;
+    if(wheelClicks > 2) {
+      if(event.deltaY > 0) {
 
+        $('#map-controls button.in').click();
+      }
+      if(event.deltaY < 0) {
+        $('#map-controls button.out').click();
+      }
+      wheelClicks = 0;
+    }
+
+  });
+  /*
+
+
+
+  //FIGURE OUT ZOOMING
+
+  $(document).on('mousewheel', '#map-overlay', function(event, delta){
+    event.preventDefault();
+    var zoomP = event.deltaY/100;
+    var newZoom = zoomL + zoomP;
+    if(newZoom < 1 || newZoom > 2) {
+      return false;
+    }
+
+    var ww = $('#map-apparatus .sizer').width(),
+        wh = $('#map-apparatus .sizer').height(),
+        wl = $('#map-apparatus').offset().left,
+        wt = $('#map-apparatus').offset().top,
+        posX = event.pageX - wl,
+        posY = event.pageY - wt,
+        initTop = parseFloat($('#map-overlay').css('top')),
+        initLeft = parseFloat($('#map-overlay').css('left'));
+        console.log(posY / wh);
+
+  });
+
+  */
 
 
   //BUTTON CLICKS

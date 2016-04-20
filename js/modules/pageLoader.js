@@ -1,6 +1,6 @@
 //PAGE LOADER FUNCTION
 function pageLoader(newSlug) {
-
+  
   // BASE STUFF
 
   //NAV ACTIVE CLASSES
