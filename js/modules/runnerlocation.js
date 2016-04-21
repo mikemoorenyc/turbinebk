@@ -58,25 +58,35 @@ function runnerlocation() {
 
     }
   });
-  var wheelClicks = 0 ;
-  var wheelReset;
-  $(document).on('mousewheel', '#map-overlay', function(event, delta){
-    clearTimeout(wheelReset);
-    wheelReset = setTimeout(function(){
-      wheelClicks = 0;
-    },500);
+
+  $(document).on('mousewheel', '#map-overlay', function(event){
+
     event.preventDefault();
-    wheelClicks++;
-    if(wheelClicks > 2) {
+
+    var delta = event.delta ;
+    var zoomOut = delta ? delta < 0 : event.originalEvent.deltaY > 0;
+    $("img#map-img").panzoom('zoom', zoomOut, {
+      increment: 0.1,
+      animate: false,
+      focal: event
+    });
+
+    /*
       if(event.deltaY > 0) {
 
-        $('#map-controls button.in').click();
+
+        $("img#map-img").panzoom("zoom", );
       }
       if(event.deltaY < 0) {
-        $('#map-controls button.out').click();
+        //$("img#map-img").panzoom("zoom", -.1);
+        $("img#map-img").panzoom("zoom", false, {
+          increment: 0.1,
+              animate: false
+        });
       }
-      wheelClicks = 0;
-    }
+      */
+
+
 
   });
   /*
