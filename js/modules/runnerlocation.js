@@ -59,7 +59,7 @@ function runnerlocation() {
     }
   });
 
-  $(document).on('mousewheel', '#map-overlay', function(event){
+  $(document).on('mousewheel', '#map-apparatus', function(event){
 
     event.preventDefault();
 
