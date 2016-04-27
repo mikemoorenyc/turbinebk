@@ -33,27 +33,13 @@ function siteInit() {
 
 //PROGRAMATICALLY Attach Fastclick
   if(Modernizr.touchevents) {
-    $(function() { 
+    $(function() {
       FastClick.attach(document.body);
     });
   }
 
-  theHistory();
+  //theHistory();
 
-
-  //CHECK IF CSS IS LOADED
-  /*
-  var thechecker = setInterval(function(){
-
-    var ztest = $('#css-checker').css('height');
-
-    if(ztest == '1px') {
-      cssLoaded = true;
-      clearInterval(thechecker);
-      console.log('css loaded');
-    }
-  }, 10);
-  */
 
 
 

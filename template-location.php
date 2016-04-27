@@ -70,6 +70,7 @@ foreach($cats as $c) {
 
 <div id="map-apparatus" style="padding-top: <?php echo ($imgh/$imgw)*100; ?>%; position:relative; width: 100%; height: 0;">
   <div class="sizer" style="position:absolute; width:100%; height:100%; position: absolute; left: 0; top: 0; pointer-events:none"></div>
+  <img id="map-transformer" src="<?php echo $siteDir;?>/assets/imgs/blank.png"/>
   <img id="map-img" src="<?php echo $imgsrc;?>" data-w="<?php echo $imgw;?>" data-h="<?php echo $imgh;?>"/>
 
   <div id="map-overlay">

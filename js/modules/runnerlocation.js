@@ -1,19 +1,29 @@
 function runnerlocation() {
+  var transformer = $("img#map-transformer");
+  function pzSet() {
+    var dif = $('#map-img').data('w') / $('#map-apparatus').width();
+
+    if(dif < 1) {
+      dif = 1;
+    }
+    transformer.panzoom({
+      minScale: 1,
+      maxScale: dif,
+      $zoomIn: $('#map-controls button.in'),
+      $zoomOut: $('#map-controls button.out'),
+      contain: 'invert',
+      transition: false
+    });
+  }
+  pzSet();
   overlaySetter();
-  $("img#map-img").panzoom({
-  minScale: 1,
-  maxScale: 3,
-  $zoomIn: $('#map-controls button.in'),
-  $zoomOut: $('#map-controls button.out'),
-  contain: 'invert',
-  transition: false
-  });
+
 
   function overlaySetter() {
-    var obj = $("img#map-img")[0].getBoundingClientRect();
+    var obj = transformer[0].getBoundingClientRect();
     var windowObj = $("#map-apparatus").offset();
 
-    $('#map-overlay').css({
+    $('#map-overlay, #map-img').css({
       width: obj.width,
       height: obj.height,
       left: (obj.left - windowObj.left)+'px',
@@ -22,14 +32,14 @@ function runnerlocation() {
   }
   overlaySetter();
   $(window).resize(function(){
-
-    $("img#map-img").panzoom('zoom', 1);
+    transformer.panzoom('dest')
+    transformer.panzoom('reset', false);
   });
 
   var dragging = false;
   var cursorX = 0;
   var cursorY = 0;
-  $("img#map-img").on('panzoomchange',function(){
+  transformer.on('panzoomchange',function(){
     overlaySetter();
   });
   $('#map-overlay').on('mousedown', function(event){
@@ -52,7 +62,7 @@ function runnerlocation() {
       var xChange =  e.clientX - cursorX;
       var yChange =  e.clientY - cursorY;
 
-      $("img#map-img").panzoom("pan", xChange, yChange, { relative: true });
+      transformer.panzoom("pan", xChange, yChange, { relative: true });
       cursorX = e.clientX,
       cursorY = e.clientY;
 
@@ -65,57 +75,20 @@ function runnerlocation() {
 
     var delta = event.delta ;
     var zoomOut = delta ? delta < 0 : event.originalEvent.deltaY > 0;
-    $("img#map-img").panzoom('zoom', zoomOut, {
+    transformer.panzoom('zoom', zoomOut, {
       increment: 0.1,
       animate: false,
       focal: event
     });
 
-    /*
-      if(event.deltaY > 0) {
-
-
-        $("img#map-img").panzoom("zoom", );
-      }
-      if(event.deltaY < 0) {
-        //$("img#map-img").panzoom("zoom", -.1);
-        $("img#map-img").panzoom("zoom", false, {
-          increment: 0.1,
-              animate: false
-        });
-      }
-      */
 
 
 
   });
-  /*
 
 
 
-  //FIGURE OUT ZOOMING
 
-  $(document).on('mousewheel', '#map-overlay', function(event, delta){
-    event.preventDefault();
-    var zoomP = event.deltaY/100;
-    var newZoom = zoomL + zoomP;
-    if(newZoom < 1 || newZoom > 2) {
-      return false;
-    }
-
-    var ww = $('#map-apparatus .sizer').width(),
-        wh = $('#map-apparatus .sizer').height(),
-        wl = $('#map-apparatus').offset().left,
-        wt = $('#map-apparatus').offset().top,
-        posX = event.pageX - wl,
-        posY = event.pageY - wt,
-        initTop = parseFloat($('#map-overlay').css('top')),
-        initLeft = parseFloat($('#map-overlay').css('left'));
-        console.log(posY / wh);
-
-  });
-
-  */
 
 
   //BUTTON CLICKS
