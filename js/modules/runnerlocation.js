@@ -3,8 +3,8 @@ function runnerlocation() {
   function pzSet() {
     var dif = $('#map-img').data('w') / $('#map-apparatus').width();
 
-    if(dif < 1) {
-      dif = 1;
+    if(dif <= 1) {
+      return false;
     }
     transformer.panzoom({
       minScale: 1,
@@ -32,8 +32,9 @@ function runnerlocation() {
   }
   overlaySetter();
   $(window).resize(function(){
-    transformer.panzoom('dest')
-    transformer.panzoom('reset', false);
+    transformer.panzoom('reset',false);
+    //transformer.panzoom('destroy');
+    overlaySetter();
   });
 
   var dragging = false;
