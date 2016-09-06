@@ -40,7 +40,7 @@ function add_react_script($hook) {
   wp_enqueue_script( 'react_dom', 'https://cdnjs.cloudflare.com/ajax/libs/react/0.14.8/react-dom.js' );
 
   wp_enqueue_script( 'sortable_list_plugin', 'https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.4.2/Sortable.min.js' );
-  wp_enqueue_script( 'draggable_plugin', 'https://npmcdn.com/draggabilly@2.1/dist/draggabilly.pkgd.min.js' );
+  wp_enqueue_script( 'draggable_plugin', 'https://unpkg.com/draggabilly@2.1/dist/draggabilly.pkgd.min.js' );
   wp_enqueue_style('main_style', get_bloginfo('template_url').'/map-component/main.css');
 
 
